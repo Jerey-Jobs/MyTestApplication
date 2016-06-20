@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         text.setText("xiamin");
         Log.i("xiamin","keyi");
         Log.e("testerror","sdr");
+        Log.e("testerror","sdr");
     }
 
     protected void onStart()
