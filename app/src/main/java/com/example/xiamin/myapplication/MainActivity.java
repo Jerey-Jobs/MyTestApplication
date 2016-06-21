@@ -5,11 +5,11 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-
-
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText usrPassword;
     private EditText usrPassword2;
     private Button enSureButton;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -36,7 +37,14 @@ public class MainActivity extends AppCompatActivity {
         usrPassword2 = (EditText) findViewById(R.id.usr_name);
         enSureButton = (Button) findViewById(R.id.confirm_button);
 
-      //  enSureButton.setOnClickListener();
+        enSureButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, usrName.getText() + "m:" + usrPassword.getText(),
+                        Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
     }
