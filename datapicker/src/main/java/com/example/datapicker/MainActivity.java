@@ -1,5 +1,6 @@
 package com.example.datapicker;
 
+import android.app.TimePickerDialog;
 import android.icu.util.Calendar;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+//        new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+//            @Override
+//            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+//                String src = i + "年" + (i1 + 1) + "月" + i2 +"天";
+//                Toast.makeText(MainActivity.this, src, Toast.LENGTH_LONG).show();
+//            }
+//        },12,12,12).show();
+//
 
+        new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                String src = i + "时" + i1 + "分";
+                Toast.makeText(MainActivity.this, src, Toast.LENGTH_LONG).show();
+            }
+        },11,11,true).show();
     }
 }
