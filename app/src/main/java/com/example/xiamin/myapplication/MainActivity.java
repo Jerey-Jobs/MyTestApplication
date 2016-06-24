@@ -1,6 +1,7 @@
 package com.example.xiamin.myapplication;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,13 +29,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //将布局xml文件加载
         setContentView(R.layout.activity_main);
-        System.out.println("sad");
-        Log.i("xiamin", "keyi");
-        Log.e("testerror", "sdr");
-        Log.e("testerror", "sdr");
         usrName = (EditText) findViewById(R.id.usr_name);
-        usrPassword = (EditText) findViewById(R.id.usr_name);
-        usrPassword2 = (EditText) findViewById(R.id.usr_name);
+        usrPassword = (EditText) findViewById(R.id.pro_password);
+        usrPassword2 = (EditText) findViewById(R.id.confirm_password);
         enSureButton = (Button) findViewById(R.id.confirm_button);
 
         enSureButton.setOnClickListener(new View.OnClickListener() {
@@ -42,11 +39,29 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, usrName.getText() + "m:" + usrPassword.getText(),
                         Toast.LENGTH_LONG).show();
+                /*
+                *intent 第一个参数 上下文对象
+                *       第二个参数 目标文件
+                */
+                Intent intent = new Intent(MainActivity.this, controlActivity.class);
+                MainActivity.this.startActivityForResult(intent, 1);
 
             }
         });
-
-
     }
 
+    /*接收其他activity传来的数据*/
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            Log.i("tag","1 == ");
+            if(resultCode == 2)
+            {
+                String str = data.getStringExtra("data");
+                Log.i("tag",str);
+            }
+
+        }
+    }
 }
