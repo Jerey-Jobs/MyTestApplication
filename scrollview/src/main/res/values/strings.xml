@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">ScrollView</string>
+    <string name="mydata">wrap_content:包裹实际控件内容
+fill_parent:铺满父容器，2.3api之后添加的一个属性值
+match_parent:铺满父容器，2.3api之前添加的一个属性值
+
+orienttation vertical
+
+button:可以设置文本内容的一个按钮
+imagebutton：不可以设置内容 能设置src属性添加图片 同时也能background
+
+每个组件都得包含android：name这个属性，推荐用全称（包名，类名）
+    intent-filter过滤器可以选写
+四大组件中 除了BroadcastReceiver可以使用代码声明注册外，其他逗得Manifest中
+
+viewpager 界面滑动
+viewFliper
+
+        说到android的左右滑动效果我们可以说是在每个应用上面都可以看到这样的效果，不管是微博，还是QQ等。实现左右滑动的方式很多，有ViewPaer(不过这个和需要android-support-v4.jar的支持)，自定义实现Viewgroup，gallery等都可以达到这种效果。这里做下ViewFliper实现左右滑动的效果。
+
+以下会会用到的技术有：
+1、ViewFlipper
+2、GestureDetector
+3、Animation
+主要是这三个类再起作用。
+
+原理：向左向右滑动主要是依赖手势来控制，手势向右滑动就调用 viewFlipper.showNext();方法，同理，向左滑动就会去调用viewFlipper.showPrevious();方法。
+
+</string>
+</resources>
