@@ -19,13 +19,13 @@ public class MainActivity extends AppCompatActivity {
         Uri uri = ContactsContract.Contacts.CONTENT_URI; //查询联系人
         //第一个是uri
         Cursor cursor = contentResolver.query(uri,new String[]{ContactsContract.Contacts._ID,ContactsContract.Contacts.DISPLAY_NAME},null,null,null);
-
+        Log.i("iii",ContactsContract.Contacts._ID  + ContactsContract.Contacts.DISPLAY_NAME);
         if(cursor != null)
         {
             Log.i("iii","cursor is not null");
             while(cursor.moveToNext()){
-                int id = cursor.getInt(cursor.getColumnIndex("_id"));
-                String str = cursor.getString(cursor.getColumnIndex("display_name"));
+                int id = cursor.getInt(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+                String str = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME));
                 Log.i("iii","id:" + id + "  name:" + str);
 
             }
