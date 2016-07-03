@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -47,8 +49,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         my_simpleAdapter = new SimpleAdapter(this, this.getdata(), R.layout.item_layout, new String[]{"pic", "text"},
                 new int[]{R.id.imageView, R.id.text});
         listView.setAdapter(my_simpleAdapter);
+
         listView.setOnItemClickListener(this);
         listView.setOnScrollListener(this);
+
+        LayoutAnimationController lac=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.layoutanim));
+        lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        listView.setLayoutAnimation(lac);
+        listView.startLayoutAnimation();
     }
 
     private List<Map<String, Object>> getdata() {
