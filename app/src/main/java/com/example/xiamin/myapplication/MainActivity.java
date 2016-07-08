@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText usrPassword2;
     private Button enSureButton;
 
-
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -34,15 +33,14 @@ public class MainActivity extends AppCompatActivity {
         usrPassword2 = (EditText) findViewById(R.id.confirm_password);
         enSureButton = (Button) findViewById(R.id.confirm_button);
 
-
-
         enSureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                if(usrPassword.getText().equals(usrPassword2.getText().toString()))
+                if(usrPassword.getText().toString().equals(usrPassword2.getText().toString()))
                 {
-                    new Mythread().start();
+                //    new Mythread().start();
+                    Log.i("iii", usrPassword.getText().toString() + usrPassword2.getText());
                 }
                 else
                 {
@@ -61,9 +59,6 @@ public class MainActivity extends AppCompatActivity {
 
 //                startActivity(intent);
 //                overridePendingTransition(R.anim.activityin,R.anim.activityout);
-
-
-
             }
         });
     }
@@ -73,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 1) {
-            Log.i("tag","1 == ");
+            Log.i("iii","1 == ");
             if(resultCode == 2)
             {
                 String str = data.getStringExtra("data");
-                Log.i("tag",str);
+                Log.i("iii",str);
             }
 
         }

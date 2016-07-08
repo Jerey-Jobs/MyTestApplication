@@ -30,11 +30,8 @@ public class controlActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.userinfo);
 
-
-
         ItemInit();
         listTest();
-
     }
 
     private void ItemInit()
@@ -47,6 +44,9 @@ public class controlActivity extends AppCompatActivity {
                 new String[]{"pic","name","password"},new int[]{R.id.itemImage,R.id.itemName,R.id.itemPassword});
         listView.setAdapter(simpleAdapter);
 
+        /***
+         *加载一个layout动画
+         */
         LayoutAnimationController lac=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.activityin));
         lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
         listView.setLayoutAnimation(lac);
