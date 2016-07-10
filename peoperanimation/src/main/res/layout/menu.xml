@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:layout_marginBottom="2dp"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:id="@+id/imageb"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:src="@drawable/b" />
+
+    <ImageView
+        android:id="@+id/imagec"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+
+        android:src="@drawable/c" />
+
+    <ImageView
+        android:id="@+id/imaged"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:paddingLeft="5dp"
+        android:paddingTop="5dp"
+        android:src="@drawable/d" />
+
+    <ImageView
+        android:id="@+id/imagee"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+
+        android:src="@drawable/e" />
+
+    <ImageView
+        android:id="@+id/imagef"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+
+        android:src="@drawable/f" />
+
+    <ImageView
+        android:id="@+id/imageg"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+
+        android:src="@drawable/g" />
+
+
+    <ImageView
+        android:id="@+id/imagea"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:clickable="true"
+        android:src="@drawable/a" />
+
+
+</merge>
