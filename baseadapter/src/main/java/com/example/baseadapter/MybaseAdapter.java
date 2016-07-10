@@ -1,6 +1,5 @@
 package com.example.baseadapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,10 @@ public class MybaseAdapter extends BaseAdapter {
     private List<ItemBean> list;
     private LayoutInflater inflater;  //将xml转换成布局
 
-    public MybaseAdapter(List<ItemBean> list, Context context)
-    {
+    public MybaseAdapter(List<ItemBean> list) {
         this.list = list;
-        this.inflater = LayoutInflater.from(context);
-}
+        this.inflater = LayoutInflater.from(MainActivity.getContext());
+    }
 
     @Override
     public int getCount() {
@@ -53,7 +51,7 @@ public class MybaseAdapter extends BaseAdapter {
 //        imageView.setImageResource(list.get(i).ItemImageResId);
 //        title.setText(list.get(i).Itemstring);
 //        text.setText(list.get(i).ItemContent);
-       // return myview;
+        // return myview;
 
         /**
          * 普通方案 还是得每次去findviewbyid 不过不需要每次都去将layout转换成view
@@ -81,16 +79,14 @@ public class MybaseAdapter extends BaseAdapter {
          */
 
         ViewHolder viewHolder;
-        if(view == null)
-        {
+        if (view == null) {
             viewHolder = new ViewHolder();
-            view = inflater.inflate(R.layout.item,null);
+            view = inflater.inflate(R.layout.item, null);
             viewHolder.HimageView = (ImageView) view.findViewById(R.id.iv_image);
-            viewHolder.Htitle = (TextView)view.findViewById(R.id.iv_title);
+            viewHolder.Htitle = (TextView) view.findViewById(R.id.iv_title);
             viewHolder.Htext = (TextView) view.findViewById(R.id.iv_text);
             view.setTag(viewHolder);
-        }
-        else {
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
@@ -103,7 +99,8 @@ public class MybaseAdapter extends BaseAdapter {
 
 
     }
-    class ViewHolder{
+
+    class ViewHolder {
         public ImageView HimageView;
         public TextView Htitle;
         public TextView Htext;

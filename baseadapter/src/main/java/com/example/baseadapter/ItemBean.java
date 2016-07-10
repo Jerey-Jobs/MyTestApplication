@@ -8,6 +8,7 @@ public class ItemBean {
     protected String Itemstring;
     public String ItemContent;
 
+
     public ItemBean(int itemImageResId,String itemstring, String itemContent) {
         this.Itemstring = itemstring;
         this.ItemImageResId = itemImageResId;
