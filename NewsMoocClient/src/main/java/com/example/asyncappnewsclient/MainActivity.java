@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.ListView;
 
 import org.json.JSONArray;
@@ -31,6 +33,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         listView_news = (ListView) findViewById(R.id.news_listview);
+        LayoutAnimationController lac=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.layoutanim));
+        lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
+        listView_news.setLayoutAnimation(lac);
+        listView_news.startLayoutAnimation();
         new NewsAsyncTask().execute(url);
     }
 
