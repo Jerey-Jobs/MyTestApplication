@@ -16,10 +16,12 @@ import java.util.List;
 public class NewsAdapter extends BaseAdapter {
     private List<NewsBean> mlist;
     private LayoutInflater inflater;
+    private ImageLoader imageLoader;
 
     public NewsAdapter(List<NewsBean> mlist, Context context) {
         this.mlist = mlist;
         this.inflater = LayoutInflater.from(context);
+        imageLoader = new ImageLoader();
     }
 
     @Override
@@ -56,7 +58,7 @@ public class NewsAdapter extends BaseAdapter {
 
         viewHolder.imageView.setImageResource(R.mipmap.ic_launcher);
         viewHolder.imageView.setTag(mlist.get(i).newsImageUrl);
-        new ImageLoader().showImageByAsyncTask(viewHolder.imageView,mlist.get(i).newsImageUrl);
+        imageLoader.showImageByAsyncTask(viewHolder.imageView,mlist.get(i).newsImageUrl);
         viewHolder.title.setText(mlist.get(i).newsTitle);
         viewHolder.content.setText(mlist.get(i).newsContent);
 
