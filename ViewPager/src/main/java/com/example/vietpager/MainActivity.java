@@ -12,7 +12,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener{
+public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private List<View> viewList;
     private ViewPager viewPager;
     private PagerTabStrip tabStrip;
@@ -38,8 +38,13 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         tabStrip.setTabIndicatorColor(Color.BLUE);
 
         viewPager.setOnPageChangeListener(this);
-
+        /**
+         * 为viewPager设置动画效果
+         */
+        viewPager.setPageTransformer(true, new DepthPageTransformer());
        FragmentInit();
+     //  Init();
+
     }
 
 
@@ -63,18 +68,17 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
     }
 
 
-    private void FragmentInit()
-    {
+    private void FragmentInit() {
         fragmentslist = new ArrayList<Fragment>();
         fragmentslist.add(new Fragment1());
         fragmentslist.add(new Fragment2());
         fragmentslist.add(new Fragment3());
         fragmentslist.add(new Fragment4());
 
-        MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(),tablist,fragmentslist);
-        MyFragmentStateAdapter myFragmentStateAdapter = new MyFragmentStateAdapter(getSupportFragmentManager(),tablist,fragmentslist);
+        MyFragmentPagerAdapter myFragmentPagerAdapter = new MyFragmentPagerAdapter(getSupportFragmentManager(), tablist, fragmentslist);
+        MyFragmentStateAdapter myFragmentStateAdapter = new MyFragmentStateAdapter(getSupportFragmentManager(), tablist, fragmentslist);
 
-        viewPager.setAdapter(myFragmentStateAdapter);
+        viewPager.setAdapter(myFragmentPagerAdapter);
     }
 
     @Override
@@ -84,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     @Override
     public void onPageSelected(int position) {
-        Toast.makeText(this, "dangqian" +position,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "dangqian" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
