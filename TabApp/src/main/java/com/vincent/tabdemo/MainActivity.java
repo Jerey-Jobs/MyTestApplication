@@ -20,6 +20,9 @@ import butterknife.InjectView;
 
 public class MainActivity extends AppCompatActivity implements View.OnTouchListener, TabHost.OnTabChangeListener {
 
+    /**
+     * 使用ButterKnife 使我们从控件id中解放出来，@InjectView(R.id.fragmenttabhost)的添加 即可使用
+     */
     @InjectView(R.id.fragmenttabhost)
     FragmentTabHost mFragmenttabhost;
     @InjectView(R.id.drawerable)
@@ -30,15 +33,16 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        /**初始化ButterKnife*/
         ButterKnife.inject(this);
 
         initView();
-        initActionBar();
+        /**暂时先不显示回退键*/
+     //   initActionBar();
     }
 
     private void initActionBar() {
         ActionBar actionBar = getSupportActionBar();
-
         /**显示回退键，默认为false*/
         actionBar.setDisplayHomeAsUpEnabled(true);
     }
@@ -70,6 +74,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
     }
 
+    /**
+     * 加载底部FragmentTab
+     */
     private void initTab() {
         MainTab[] tabs = MainTab.values();
 
@@ -85,8 +92,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             View indicator = LayoutInflater.from(this).inflate(R.layout.tab_indicator, null);
 
-            TextView title = (TextView) indicator.findViewById(R.id.tab_title);
 
+            TextView title = (TextView) indicator.findViewById(R.id.tab_title);
             Drawable drawable = this.getResources().getDrawable(mainTab.getResIcon());
 
             //setCompoundDrawablesWithIntrinsicBounds
@@ -129,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            /**安卓自带的返回箭头 ActionBar中有*/
             case android.R.id.home:
                 mDrawerToggle.onOptionsItemSelected(item);
                 break;

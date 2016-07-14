@@ -36,6 +36,13 @@ public enum MainTab {
     private int resIcon;
     private Class<?> clz;
 
+    /**
+     *
+     * @param idx            序号
+     * @param resName        名字资源号
+     * @param resIcon        图标资源号
+     * @param clz
+     */
     private MainTab(int idx, int resName, int resIcon, Class<?> clz) {
         this.idx = idx;
         this.resName = resName;
