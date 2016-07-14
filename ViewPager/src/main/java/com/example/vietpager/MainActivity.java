@@ -3,7 +3,7 @@ package com.example.vietpager;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -15,7 +15,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private List<View> viewList;
     private ViewPager viewPager;
-    private PagerTabStrip tabStrip;
+    private PagerTitleStrip tabStrip;
     private List<String> tablist;
     private List<Fragment> fragmentslist;
 
@@ -31,11 +31,12 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
         tablist.add("第4页");
 
         viewPager = (ViewPager) findViewById(R.id.pager);
-        tabStrip = (PagerTabStrip) findViewById(R.id.tab);
+        tabStrip = (PagerTitleStrip) findViewById(R.id.tab);
 
-        tabStrip.setTextColor(Color.RED);
-        tabStrip.setDrawFullUnderline(false);
-        tabStrip.setTabIndicatorColor(Color.BLUE);
+        tabStrip.setTextColor(Color.BLUE);
+        tabStrip.setTextSize(0,25.0f);
+    //    tabStrip.(false);
+    //    tabStrip.(Color.BLUE);
 
         viewPager.setOnPageChangeListener(this);
         /**
@@ -47,10 +48,8 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
     }
 
-
     private void Init() {
         viewList = new ArrayList<View>();
-
 
         View view1 = View.inflate(this, R.layout.view1, null);
         View view2 = View.inflate(this, R.layout.view2, null);
@@ -66,7 +65,6 @@ public class MainActivity extends AppCompatActivity implements ViewPager.OnPageC
 
         viewPager.setAdapter(adapter);
     }
-
 
     private void FragmentInit() {
         fragmentslist = new ArrayList<Fragment>();
