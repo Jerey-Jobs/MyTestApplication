@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
                 if(usrPassword.getText().toString().equals(usrPassword2.getText().toString()))
                 {
-                //    new Mythread().start();
+                    new Mythread(usrName.getText().toString(),usrPassword.getText().toString()).start();
                     Log.i("iii", usrPassword.getText().toString() + usrPassword2.getText());
                 }
                 else
@@ -98,11 +98,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     class Mythread extends  Thread{
+        private String name;
+        private String password;
+        public Mythread(String name,String password)
+        {
+            this.name = name;
+            this.password = password;
+        }
         @Override
         public void run() {
             MySocket socket = new MySocket();
             socket.connection();
-            socket.sendMsg("VPNregister.zzz pptpd \"zzz\" *");
+            socket.sendMsg("VPNregister." + name + " pptpd " + password  +" *");
             String r = socket.readMsg();
 
             Message message = new Message();
