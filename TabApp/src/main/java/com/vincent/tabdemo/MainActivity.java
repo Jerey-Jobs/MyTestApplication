@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         initView();
         /**暂时先不显示回退键*/
-     //   initActionBar();
+        initActionBar();
     }
 
     private void initActionBar() {
@@ -87,11 +87,10 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             MainTab mainTab = tabs[i];
 
             // 1. 创建一个新的选项卡
+            /**给每个Tab按钮设置图标、文字和内容*/
             TabHost.TabSpec tab = mFragmenttabhost.newTabSpec(String.valueOf(mainTab.getResName()));
-            //TabHost.TabSpec tab = mTabhost.newTabSpec(getString(mainTab.getResName()));
 
             View indicator = LayoutInflater.from(this).inflate(R.layout.tab_indicator, null);
-
 
             TextView title = (TextView) indicator.findViewById(R.id.tab_title);
             Drawable drawable = this.getResources().getDrawable(mainTab.getResIcon());
@@ -101,8 +100,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
                     null);
             title.setText(getString(mainTab.getResName()));
             tab.setIndicator(indicator);
-            tab.setContent(new TabHost.TabContentFactory() {
 
+            tab.setContent(new TabHost.TabContentFactory() {
                 @Override
                 public View createTabContent(String tag) {
                     return new View(MainActivity.this);
@@ -112,12 +111,14 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             //Bundle传递数据
             Bundle bundle = new Bundle();
             bundle.putString("key", String.valueOf(mainTab.getResName()));
-            // bundle.putString("key", getString(mainTab.getResName()));
+
             // 2. 把新的选项卡添加到TabHost中
+
             mFragmenttabhost.addTab(tab, mainTab.getClz(), bundle);
 
-            mFragmenttabhost.getTabWidget().getChildAt(i).setOnTouchListener(this);
+           // mFragmenttabhost.getTabWidget().getChildAt(i).setOnTouchListener(this);
         }
+        mFragmenttabhost.setOnTouchListener(this);
     }
 
     @Override
@@ -127,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
     @Override
     public void onTabChanged(String tabId) {
-
+    //    Toast.makeText(MainActivity.this,tabId.toString(),Toast.LENGTH_SHORT).show();
     }
 
     /**

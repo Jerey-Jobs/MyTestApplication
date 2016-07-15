@@ -34,6 +34,8 @@
         android:layout_gravity="start"
         android:background="#DFDFDF">
         <!-- 可添加你需要在菜单中显示的布局-->
+        <include android:id="@+id/drawerActivityId"
+            layout="@layout/layout_drawerlayout"/>
     </FrameLayout>
 
 
