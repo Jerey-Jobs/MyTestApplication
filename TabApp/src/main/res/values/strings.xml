@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">TabDemo</string>
 
-    <string name="main_tab_news">综合</string>
+    <string name="main_tab_news">文本笑话</string>
 
-    <string name="main_tab_move">动弹</string>
+    <string name="main_tab_move">图片笑话</string>
 
     <string name="main_tab_quick">快速</string>
 

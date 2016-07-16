@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
         final int size = tabs.length;
 
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < 2; i++) {
             // 找到每一个枚举的Fragment对象
             MainTab mainTab = tabs[i];
 
@@ -95,9 +95,8 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
             TextView title = (TextView) indicator.findViewById(R.id.tab_title);
             Drawable drawable = this.getResources().getDrawable(mainTab.getResIcon());
 
-            //setCompoundDrawablesWithIntrinsicBounds
-            title.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null,
-                    null);
+            //setCompoundDrawablesWithIntrinsicBounds 在上下左右方向显示图片
+            title.setCompoundDrawablesWithIntrinsicBounds(null, drawable, null, null);
             title.setText(getString(mainTab.getResName()));
             tab.setIndicator(indicator);
 
@@ -116,19 +115,21 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
 
             mFragmenttabhost.addTab(tab, mainTab.getClz(), bundle);
 
-           // mFragmenttabhost.getTabWidget().getChildAt(i).setOnTouchListener(this);
+            // mFragmenttabhost.getTabWidget().getChildAt(i).setOnTouchListener(this);
         }
         mFragmenttabhost.setOnTouchListener(this);
+
     }
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
         return false;
     }
 
     @Override
     public void onTabChanged(String tabId) {
-    //    Toast.makeText(MainActivity.this,tabId.toString(),Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(MainActivity.this,tabId.toString(),Toast.LENGTH_SHORT).show();
     }
 
     /**
