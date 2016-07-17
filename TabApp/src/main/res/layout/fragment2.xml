@@ -2,16 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/id_swipe_ly"
+            android:id="@+id/fragment2_swipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent" >
 
             <ListView
-                android:id="@+id/fragment1_listview"
+                android:id="@+id/fragment2_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 >
@@ -20,7 +21,7 @@
 
 
         <ImageView
-            android:id="@+id/refersh_button"
+            android:id="@+id/fragment2_goto_top"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="30dp"
             android:layout_width="60dp"
@@ -28,10 +29,6 @@
             android:src="@drawable/top"
             android:layout_gravity="right|bottom"
             android:clickable="true"/>
-
     </FrameLayout>
-
-
-
 
 </LinearLayout>

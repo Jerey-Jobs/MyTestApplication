@@ -132,14 +132,14 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
         switch (scrollState)
         {
             case SCROLL_STATE_FLING:
-                Log.i("iii","用户在手指离开之前，用力的划一下 试图惯性滑动");
+             //   Log.i("iii","用户在手指离开之前，用力的划一下 试图惯性滑动");
               //  new MyAsyncTask().execute(pageCount++);
                 break;
             case SCROLL_STATE_IDLE:
-                Log.i("iii","空闲 试图停止滑动");
+             //   Log.i("iii","空闲 试图停止滑动");
                 break;
             case SCROLL_STATE_TOUCH_SCROLL:
-                Log.i("iii","手指没有离开屏幕，视图正在滑动");
+             //   Log.i("iii","手指没有离开屏幕，视图正在滑动");
                 break;
         }
     }
