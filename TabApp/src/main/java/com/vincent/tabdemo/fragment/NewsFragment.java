@@ -1,5 +1,6 @@
 package com.vincent.tabdemo.fragment;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.show.api.ShowApiRequest;
 import com.vincent.tabdemo.Adapter.XiaohuaListAdapter;
@@ -42,6 +44,10 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
     private XiaohuaListAdapter adapter;
     /**为加载笑话的页数 根据页数去服务器返回 为了下次进入不显示相同笑话 之后会将其存入sharepreference*/
     private Integer pageCount = 1;
+    private Boolean isfirstin = true;
+
+    private MyAsyncTask myAsyncTask;
+    private Boolean isAsyncTaskOn = false;
 
     Handler handler;
 
@@ -60,8 +66,9 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
          */
         if (rootView == null) {
             rootView = inflater.inflate(R.layout.fragment1, container, false);
-            InitView();
 
+            getPageCount();
+            InitView();
 
         }
         ViewGroup parent = (ViewGroup) rootView.getParent();
@@ -78,10 +85,25 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
         listBean = new ArrayList<XiaohuaBean>();
         adapter = new XiaohuaListAdapter(listBean, listView, getContext());
         listView.setAdapter(adapter);
+        myAsyncTask = new MyAsyncTask();
+
         listView.setOnScrollListener(this);
 
-        new MyAsyncTask().execute(pageCount++);
+        //     new MyAsyncTask().execute(pageCount++);
 
+    }
+
+
+    private void getPageCount()
+    {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getActivity().getSharedPreferences("mypreference",getContext().MODE_PRIVATE);
+        pageCount =  sharedPreferences.getInt("pageCount",1);
+        Log.i("iii","pagecount = " + pageCount);
+        if(pageCount != 1)
+        {
+            Toast.makeText(getActivity(),"获取上次浏览Page成功",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
@@ -110,9 +132,11 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
          * listView.getLastVisiblePosition()表示在现时屏幕最后一个ListItem
          * (最后ListItem要完全显示出来才算)在整个ListView的位置（下标从0开始）
          */
-        if(listView.getLastVisiblePosition() + 2 >= totalItemCount)
+        if((listView.getLastVisiblePosition() + 1)>= totalItemCount && isfirstin == true)
         {
-            new MyAsyncTask().execute(pageCount++);
+            isfirstin = false;
+            myAsyncTask.execute(pageCount++);
+            Log.i("iii"," myAsyncTask.execute(pageCount++); = " + pageCount );
         }
 
     }
@@ -123,7 +147,6 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
         @Override
         protected List<XiaohuaBean> doInBackground(Integer... params) {
       //      List<XiaohuaBean> tmpListBean = new ArrayList<XiaohuaBean>();
-
             String appid = "22021";//要替换成自己的
             String secret = "8c8fa76935b44d959fada3656a812a61";//要替换成自己的
             final String res=new ShowApiRequest( "http://route.showapi.com/341-1", appid, secret)
@@ -133,16 +156,16 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
                     .post();
 
 
-            Log.i("iii",res);
+           // Log.i("iii",res);
 
             try {
                 JSONObject jsonObject = new JSONObject(res);
                 jsonObject = jsonObject.getJSONObject("showapi_res_body");
                 int allnum = jsonObject.getInt("allNum");
-                Log.i("iii","json allnum = " + allnum);
+             //   Log.i("iii","json allnum = " + allnum);
              //   jsonObject = jsonObject.getJSONObject("contentlist");
                 JSONArray jsonArray = jsonObject.getJSONArray("contentlist");
-                Log.i("iii","json array = " + jsonArray);
+             //   Log.i("iii","json array = " + jsonArray);
 
                 XiaohuaBean xiaohuaBean;
                 for(int i = 0; i < jsonArray.length(); i++)
@@ -157,16 +180,32 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
             } catch (JSONException e) {
                 e.printStackTrace();
                 Log.i("iii","jsonobj 创建失败");
+
             }
 
             return listBean;
         }
 
+
         @Override
         protected void onPostExecute(List<XiaohuaBean> xiaohuaBeen) {
             super.onPostExecute(xiaohuaBeen);
+
             adapter.notifyDataSetChanged();
+            //      isfirstin = false;
         }
     }
 
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getActivity().getSharedPreferences("mypreference",getContext().MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("pageCount",pageCount);
+        editor.commit();
+        Log.i("iii","pagecount = " + pageCount + "写入成功");
+
+    }
 }

@@ -148,4 +148,9 @@ public class MainActivity extends AppCompatActivity implements View.OnTouchListe
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
 }
