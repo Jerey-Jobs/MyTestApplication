@@ -6,11 +6,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -35,10 +38,11 @@ import java.util.List;
  * 更新时间   $Date$
  * 更新描述   ${TODO}
  */
-public class NewsFragment extends Fragment implements AbsListView.OnScrollListener{
+public class NewsFragment extends Fragment implements AbsListView.OnScrollListener,SwipeRefreshLayout.OnRefreshListener  {
     private View rootView;
 
     private ListView listView;
+    private SwipeRefreshLayout mSwipeLayout;
 
     private List<XiaohuaBean> listBean;
     private XiaohuaListAdapter adapter;
@@ -46,10 +50,8 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
     private Integer pageCount = 1;
     private Boolean isfirstin = true;
 
-    private MyAsyncTask myAsyncTask;
-    private Boolean isAsyncTaskOn = false;
 
-    Handler handler;
+    private ImageView refershButton;
 
     @Nullable
     @Override
@@ -81,13 +83,32 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
 
     private void InitView() {
         listView = (ListView) rootView.findViewById(R.id.fragment1_listview);
+        mSwipeLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.id_swipe_ly);
+
+        mSwipeLayout.setOnRefreshListener(this);
+        mSwipeLayout.setColorScheme(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
         listBean = new ArrayList<XiaohuaBean>();
         adapter = new XiaohuaListAdapter(listBean, listView, getContext());
         listView.setAdapter(adapter);
-        myAsyncTask = new MyAsyncTask();
+
 
         listView.setOnScrollListener(this);
+        refershButton = (ImageView) rootView.findViewById(R.id.refersh_button);
+
+        /**此为返回顶部按钮，目前刷新功能未做好，只能先以此代替*/
+        refershButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listView.setSelection(0);
+
+                TranslateAnimation animation = new TranslateAnimation(0,0,listView.getPivotY(),0);
+                animation.setDuration(500);
+                listView.startAnimation(animation);
+
+            }
+        });
 
         //     new MyAsyncTask().execute(pageCount++);
 
@@ -135,10 +156,17 @@ public class NewsFragment extends Fragment implements AbsListView.OnScrollListen
         if((listView.getLastVisiblePosition() + 1)>= totalItemCount && isfirstin == true)
         {
             isfirstin = false;
-            myAsyncTask.execute(pageCount++);
+            new MyAsyncTask().execute(pageCount++);
             Log.i("iii"," myAsyncTask.execute(pageCount++); = " + pageCount );
         }
 
+    }
+
+    @Override
+    public void onRefresh() {
+        listBean.clear();
+        new MyAsyncTask().execute(pageCount++);
+        mSwipeLayout.setRefreshing(false);
     }
 
 
