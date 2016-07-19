@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.vincent.tabdemo.Bean.XiaohuaBean;
-import com.vincent.tabdemo.R;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -30,7 +29,7 @@ public class ImageLoader {
     /**
      * 创建cache 最近最少使用算法
      */
-    private LruCache<String, Bitmap> cache;
+    public LruCache<String, Bitmap> cache;
     private ImageView imageView;
     private String url;
     private ListView mListview;
@@ -131,22 +130,30 @@ public class ImageLoader {
             if (bitmap != null) {
                 addBitmapToCache(strings[0], bitmap);
             }
+            else {
+                Log.i("iii", "getBitmap URL error URL is:" + strings[0]);
+            }
             return bitmap;
         }
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
-            if (timageview.getTag().equals(turl)) {
+            if (timageview.getTag().equals(turl) && bitmap != null) {
                 timageview.setImageBitmap(bitmap);
             }else {
                // Log.i("iii","timageview.getTag().equals(turl) fail");
-                timageview.setImageResource(R.mipmap.widget_bar_news_nor);
+               // timageview.setImageResource(R.mipmap.widget_bar_news_nor);
             }
+
+//            if(bitmap == null)
+//            {
+//
+//            }
+
 //            ImageView imageView = (ImageView) mListview.findViewWithTag(turl);
 //            if (imageView != null && bitmap != null) {
 //                imageView.setImageBitmap(bitmap);
-//
 //            }
         }
     }

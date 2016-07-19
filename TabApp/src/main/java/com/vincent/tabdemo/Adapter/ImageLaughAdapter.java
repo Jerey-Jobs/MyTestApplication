@@ -85,7 +85,7 @@ public class ImageLaughAdapter extends BaseAdapter implements AbsListView.OnScro
         viewHolder.title.setText(list.get(position).title);
         /**将每个image和对应url绑定 避免错乱显示*/
         viewHolder.content.setTag(list.get(position).content);
-    //    viewHolder.content.setImageResource(R.mipmap.ic_launcher);
+        viewHolder.content.setImageResource(R.mipmap.ic_launcher);
         imageLoader.showImageByAsyncTask(viewHolder.content,list.get(position).content);
 
 
@@ -103,15 +103,14 @@ public class ImageLaughAdapter extends BaseAdapter implements AbsListView.OnScro
         mend = firstVisibleItem + visibleItemCount;
         if (isFirstLoad == true && visibleItemCount > 0) {
             Log.i("iii", "onScroll isFirstLoad");
-
             //    imageLoader.loadImage(firstVisibleItem, visibleItemCount,list);
             isFirstLoad = false;
         }
 
-        if((listView.getLastVisiblePosition() + 1) >= totalItemCount)
-        {
-            new MyAsyncTaskGeJoke().execute(20);
-        }
+//        if((listView.getLastVisiblePosition() + 1) >= totalItemCount)
+//        {
+//            new MyAsyncTaskGeJoke().execute(20);
+//        }
     }
 
 
@@ -172,6 +171,7 @@ public class ImageLaughAdapter extends BaseAdapter implements AbsListView.OnScro
                 list.add(k);
             }
             ImageLaughAdapter.this.notifyDataSetChanged();
+
         }
     }
 
@@ -199,7 +199,6 @@ public class ImageLaughAdapter extends BaseAdapter implements AbsListView.OnScro
     {
         list.clear();
         listView.clearDisappearingChildren();
-
     }
 
 }
