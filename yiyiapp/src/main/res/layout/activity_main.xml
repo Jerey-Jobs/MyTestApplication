@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawerable"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@android:color/holo_blue_bright">
+
+    <!--主内容需要放在侧滑菜单前面 这样才能判断哪个是主界面 哪个是从界面-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/real"
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="1">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="输入内容："
+                android:id="@+id/textView"
+                android:layout_marginTop="25dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignLeft="@+id/main_edit_text"
+                android:layout_alignStart="@+id/main_edit_text" />
+
+            <EditText
+                android:layout_margin="10dp"
+                android:id="@+id/main_edit_text"
+                android:layout_below="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@android:color/background_light"
+                />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:id="@+id/main_ensure_button"
+                android:layout_alignBottom="@+id/main_edit_text"
+                android:layout_alignRight="@+id/main_edit_text"
+                android:layout_alignEnd="@+id/main_edit_text" />
+
+
+        </RelativeLayout>
+
+        <!--<android.support.design.widget.FloatingActionButton-->
+            <!--android:id="@+id/fab"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="bottom|end"-->
+
+             <!--/>-->
+
+    </LinearLayout>
+
+    <!--侧滑菜单-->
+    <FrameLayout
+        android:id="@+id/leftmenu_framlayout"
+        android:layout_width="230dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#DFDFDF">
+        <!-- 可添加你需要在菜单中显示的布局-->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="xiamin"/>
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/yi"/>
+
+
+    </FrameLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
