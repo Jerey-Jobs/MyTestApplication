@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="tabcount" format="integer"/>
+    <declare-styleable name="ViewPagerIndicator">
+        <attr name="tabcount"/>
+    </declare-styleable>
+
+</resources>
