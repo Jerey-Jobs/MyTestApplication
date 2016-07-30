@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@android:color/holo_blue_bright">
+    android:background="@color/greyback">
 
     <!--主内容需要放在侧滑菜单前面 这样才能判断哪个是主界面 哪个是从界面-->
     <LinearLayout
@@ -42,8 +42,13 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="确定"
+                android:text="翻译"
+                android:textSize="20dp"
+                android:background="@color/colorPrimary"
                 android:id="@+id/main_ensure_button"
+                android:layout_marginRight="15dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
                 android:layout_alignBottom="@+id/main_edit_text"
                 android:layout_alignRight="@+id/main_edit_text"
                 android:layout_alignEnd="@+id/main_edit_text" />
@@ -64,20 +69,12 @@
     <!--侧滑菜单-->
     <FrameLayout
         android:id="@+id/leftmenu_framlayout"
-        android:layout_width="230dp"
+        android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#DFDFDF">
         <!-- 可添加你需要在菜单中显示的布局-->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xiamin"/>
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/yi"/>
-
+        <include layout="@layout/slide_about"/>
 
     </FrameLayout>
 

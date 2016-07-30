@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">易译-极简翻译</string>
+    <string name="about_me">作者：夏敏\n
+        项目开源：https://github.com/Jerey-Jobs/MyTestApplication/tree/master/yiyiapp</string>
 </resources>
