@@ -20,24 +20,30 @@
             android:layout_height="0dip"
             android:layout_weight="1">
 
+
+
+            <EditText
+                android:id="@+id/main_edit_text"
+                android:padding="20dp"
+                android:paddingTop="50dp"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@android:color/background_light"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="输入内容："
                 android:id="@+id/textView"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="22dp"
+                android:layout_marginStart="22dp"
                 android:layout_alignParentTop="true"
-                android:layout_alignLeft="@+id/main_edit_text"
-                android:layout_alignStart="@+id/main_edit_text" />
-
-            <EditText
-                android:layout_margin="10dp"
-                android:id="@+id/main_edit_text"
-                android:layout_below="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="@android:color/background_light"
-                />
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
 
             <Button
                 android:layout_width="wrap_content"
@@ -52,6 +58,19 @@
                 android:layout_alignBottom="@+id/main_edit_text"
                 android:layout_alignRight="@+id/main_edit_text"
                 android:layout_alignEnd="@+id/main_edit_text" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Small Text"
+                android:textSize="15dp"
+                android:padding="15dp"
+                android:id="@+id/main_result_textview"
+                android:layout_below="@+id/main_edit_text"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true" />
 
 
         </RelativeLayout>
