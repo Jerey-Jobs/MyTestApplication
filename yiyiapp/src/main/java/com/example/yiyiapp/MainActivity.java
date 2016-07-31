@@ -1,17 +1,21 @@
 package com.example.yiyiapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yiyiapp.present.MainPresenter;
+import com.example.yiyiapp.service.ListenClipboardService;
+import com.example.yiyiapp.util.myToast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView textViewResult;
     private static Context context;
     private MainPresenter presenter = new MainPresenter();
+    private static myToast toast ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +33,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         context = MainActivity.this;
         InitView();
         checkNetworkState();
+        toast = new myToast((ViewGroup)findViewById(R.id.llToast));
+
+
+        Intent serviceIntent = new Intent(MainActivity.this, ListenClipboardService.class);
+        context.startService(serviceIntent);
     }
 
     private void InitView() {
@@ -58,8 +68,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (!flag) {
             Toast.makeText(this, "无网络连接！", Toast.LENGTH_SHORT).show();
+
         } else {
             Toast.makeText(this, "网络准备充分！", Toast.LENGTH_SHORT).show();
+
+
         }
     }
 
@@ -78,4 +91,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         return context;
     }
+    public static myToast getToast() {return toast;}
 }

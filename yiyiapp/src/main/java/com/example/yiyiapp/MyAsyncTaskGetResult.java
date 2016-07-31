@@ -3,6 +3,10 @@ package com.example.yiyiapp;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import cz.msebera.android.httpclient.HttpEntity;
@@ -26,6 +30,25 @@ public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, Strin
     public MyAsyncTaskGetResult(String url)
     {
         this.url = url;
+    }
+
+
+    private String JsonForRes(String json)
+    {
+        try {
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray jsonArray = jsonObject.getJSONArray("translation");
+            Log.i("iii",jsonArray.toString());
+            StringBuffer stringBuffer = new StringBuffer();
+            for(int i = 0; i < jsonArray.length(); i++)
+            {
+                stringBuffer.append(jsonArray.getString(i));
+            }
+            return stringBuffer.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return json;
     }
 
 
@@ -57,10 +80,12 @@ public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, Strin
             HttpResponse response = httpCLient.execute(httpget);
             HttpEntity entity = response.getEntity();
             res = EntityUtils.toString(entity);
+
+            res = JsonForRes(res);
         }catch (IllegalArgumentException e)
         {
       //      Toast.makeText(MainActivity.getContext(),"错误的格式",Toast.LENGTH_SHORT).show();
-            res = "格式错误";
+            res = "格式错误 输入中不能有回车等符号";
         }
 
         return res;
