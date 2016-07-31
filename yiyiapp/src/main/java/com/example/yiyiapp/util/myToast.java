@@ -1,5 +1,6 @@
 package com.example.yiyiapp.util;
 
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +34,11 @@ public class myToast {
      * @param res
      */
     public void show(String src, String res) {
+        Log.i("iii","toast show");
+        if(src.equals("") || res.equals("") || res.equals("no query"))
+        {
+            return;
+        }
         title.setText(src);
         text.setText(res);
         toast = new Toast(MainActivity.getContext());
