@@ -14,8 +14,7 @@ public class MainPresenter {
     {
         button.setText("翻译中...");
         button.setClickable(false);
-        MyAsyncTaskGetResult asyncTaskGetResult = new MyAsyncTaskGetResult(url);
-        asyncTaskGetResult.setTaskHandler(new MyAsyncTaskGetResult.HttpTaskHandler() {
+        MyAsyncTaskGetResult asyncTaskGetResult = new MyAsyncTaskGetResult(url) {
             @Override
             public void taskSuccessful(String json) {
                 textView.setText(json);
@@ -29,7 +28,7 @@ public class MainPresenter {
                 button.setText("翻译");
                 button.setClickable(true);
             }
-        });
+        };
         asyncTaskGetResult.execute();
     }
 }

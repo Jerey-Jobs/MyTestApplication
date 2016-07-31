@@ -16,7 +16,7 @@ import okhttp3.OkHttpClient;
 /**
  * Created by Xiamin on 2016/7/30.
  */
-public class MyAsyncTaskGetResult extends AsyncTask<String, Void, String>{
+public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, String>{
 
     OkHttpClient okHttpClient;
     private String url;
@@ -77,21 +77,15 @@ public class MyAsyncTaskGetResult extends AsyncTask<String, Void, String>{
         Log.i("iii",s);
         if(s.equals(""))
         {
-            taskHandler.taskFailed();
+            taskFailed();
         }
         else {
-            taskHandler.taskSuccessful(s);
+            taskSuccessful(s);
         }
     }
 
-    public static interface HttpTaskHandler {
-        void taskSuccessful(String json);
-        void taskFailed();
-    }
 
-    HttpTaskHandler taskHandler;
+   public abstract void taskSuccessful(String json);
+   public abstract void taskFailed();
 
-    public void  setTaskHandler(HttpTaskHandler taskHandler) {
-        this.taskHandler = taskHandler;
-    }
 }
