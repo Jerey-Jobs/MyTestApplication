@@ -50,14 +50,20 @@ public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, Strin
          * 异步使用httpclient get结果
          */
         HttpClient httpCLient = new DefaultHttpClient();
-
+        String res = "";
         // 创建get请求实例
-        HttpGet httpget = new HttpGet(getStringURL + input);
-      //  System.out.println("executing request "+httpget.getURI());
-        // 客户端执行get请求 返回响应实体
-        HttpResponse response = httpCLient.execute(httpget);
-        HttpEntity entity = response.getEntity();
-        return EntityUtils.toString(entity);
+        try {
+            HttpGet httpget = new HttpGet(getStringURL + input);
+            HttpResponse response = httpCLient.execute(httpget);
+            HttpEntity entity = response.getEntity();
+            res = EntityUtils.toString(entity);
+        }catch (IllegalArgumentException e)
+        {
+      //      Toast.makeText(MainActivity.getContext(),"错误的格式",Toast.LENGTH_SHORT).show();
+            res = "格式错误";
+        }
+
+        return res;
     }
 
     @Override
