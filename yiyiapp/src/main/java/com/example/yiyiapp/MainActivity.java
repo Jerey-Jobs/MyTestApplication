@@ -11,12 +11,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.yiyiapp.present.MainPresenter;
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextInput;
     private Button buttonTranslate;
     private TextView textViewResult;
     private static Context context;
+    private MainPresenter presenter = new MainPresenter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.main_ensure_button: {
                 Log.i("iii","button pressed!");
-                new MyAsyncTaskGetResult(editTextInput.getText().toString()).execute();
+                presenter.MainPresenterget(editTextInput.getText().toString(),textViewResult,buttonTranslate);
                 break;
             }
         }

@@ -75,5 +75,23 @@ public class MyAsyncTaskGetResult extends AsyncTask<String, Void, String>{
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
         Log.i("iii",s);
+        if(s.equals(""))
+        {
+            taskHandler.taskFailed();
+        }
+        else {
+            taskHandler.taskSuccessful(s);
+        }
+    }
+
+    public static interface HttpTaskHandler {
+        void taskSuccessful(String json);
+        void taskFailed();
+    }
+
+    HttpTaskHandler taskHandler;
+
+    public void  setTaskHandler(HttpTaskHandler taskHandler) {
+        this.taskHandler = taskHandler;
     }
 }
