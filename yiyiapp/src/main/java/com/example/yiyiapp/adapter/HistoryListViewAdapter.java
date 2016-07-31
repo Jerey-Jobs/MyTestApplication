@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * Created by Xiamin on 2016/7/31.
  */
-public class HistoryListViewAdapter extends BaseAdapter {
+public class HistoryListViewAdapter extends BaseAdapter{
 
     private ListView listView;
     private List<HistoryInfoBean> list;
@@ -51,7 +51,7 @@ public class HistoryListViewAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
 
         if(view == null){
@@ -67,14 +67,28 @@ public class HistoryListViewAdapter extends BaseAdapter {
 
         viewHolder.src.setText(list.get(i).src);
         viewHolder.result.setText(list.get(i).result);
+        viewHolder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                delete_info(i);
+            }
+        });
 
         return view;
     }
+
 
 
     class ViewHolder{
         public TextView src;
         public TextView result;
         public Button button;
+    }
+
+
+    private void delete_info(int position)
+    {
+        list.remove(position);
+        this.notifyDataSetChanged();
     }
 }
