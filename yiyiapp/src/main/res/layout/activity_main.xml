@@ -75,6 +75,17 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentEnd="true" />
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/goto_history_button"
+                android:layout_marginBottom="40dp"
+                android:src="@drawable/g"
+                android:background="@color/gray"
+                android:layout_alignParentBottom="true"
+                android:layout_alignRight="@+id/main_ensure_button"
+                android:layout_alignEnd="@+id/main_ensure_button" />
+
 
         </RelativeLayout>
 

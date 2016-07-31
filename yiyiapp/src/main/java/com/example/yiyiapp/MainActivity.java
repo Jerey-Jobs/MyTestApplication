@@ -10,17 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.yiyiapp.present.MainPresenter;
 import com.example.yiyiapp.service.ListenClipboardService;
+import com.example.yiyiapp.util.AnimationUtils;
 import com.example.yiyiapp.util.myToast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private EditText editTextInput;
     private Button buttonTranslate;
+    private ImageButton buttonGoHistory;
     private TextView textViewResult;
     private static Context context;
     private MainPresenter presenter = new MainPresenter();
@@ -35,7 +38,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         checkNetworkState();
         toast = new myToast((ViewGroup)findViewById(R.id.llToast));
 
-
         Intent serviceIntent = new Intent(MainActivity.this, ListenClipboardService.class);
         context.startService(serviceIntent);
     }
@@ -44,8 +46,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editTextInput = (EditText) findViewById(R.id.main_edit_text);
         buttonTranslate = (Button) findViewById(R.id.main_ensure_button);
         textViewResult = (TextView) findViewById(R.id.main_result_textview);
+        buttonGoHistory = (ImageButton) findViewById(R.id.goto_history_button);
 
         buttonTranslate.setOnClickListener(this);
+        buttonGoHistory.setOnClickListener(this);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        /**显示回退键，默认为false*/
@@ -68,11 +72,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         if (!flag) {
             Toast.makeText(this, "无网络连接！", Toast.LENGTH_SHORT).show();
-
         } else {
             Toast.makeText(this, "网络准备充分！", Toast.LENGTH_SHORT).show();
-
-
         }
     }
 
@@ -80,8 +81,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_ensure_button: {
-                Log.i("iii","button pressed!");
                 presenter.MainPresenterget(editTextInput.getText().toString(),textViewResult,buttonTranslate);
+                Log.i("iii","button pressed!");
+                break;
+            }
+            case R.id.goto_history_button:{
+                Log.i("iii", "first");
+             //   Intent intent = new Intent(this, HistoryActivity.class);
+                AnimationUtils.startActivity(this, HistoryActivity.class, view, R.color.colorPrimary);
                 break;
             }
         }
