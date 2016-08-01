@@ -88,6 +88,7 @@ public class HistoryListViewAdapter extends BaseAdapter{
 
     private void delete_info(int position)
     {
+        presenter.DeleteFromHistory(list.get(position));
         list.remove(position);
         this.notifyDataSetChanged();
     }

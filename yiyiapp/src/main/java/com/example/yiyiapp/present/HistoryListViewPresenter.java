@@ -63,4 +63,17 @@ public class HistoryListViewPresenter {
         helper.close();
     }
 
+    public void DeleteFromHistory(HistoryInfoBean bean)
+    {
+        MySqliteOpenHelper helper =  new MySqliteOpenHelper(MainActivity.getContext(),"search_db");
+        SQLiteDatabase db = helper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put("word",bean.src);
+        db.delete("search_db", "word=?", new String[] {bean.src});
+        Log.i("iii","DeleteFromHistory" + ": " +bean.src + " "+  bean.result);
+        db.close();
+        helper.close();
+    }
+
 }
