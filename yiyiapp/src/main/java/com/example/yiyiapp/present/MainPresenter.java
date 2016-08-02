@@ -11,8 +11,10 @@ import com.example.yiyiapp.util.HistoryInfoBean;
  */
 public class MainPresenter {
 
-    public void MainPresenterget(final String url, final TextView textView, final Button button)
-    {
+    public void MainPresenterget(final String url, final TextView textView, final Button button) {
+        if (url.toString().equals("")) {
+            return;
+        }
         button.setText("翻译中...");
         button.setClickable(false);
         MyAsyncTaskGetResult asyncTaskGetResult = new MyAsyncTaskGetResult(url) {
@@ -22,12 +24,15 @@ public class MainPresenter {
                 button.setText("翻译");
                 button.setClickable(true);
 
-                HistoryInfoBean bean;
-                HistoryListViewPresenter presenter = new HistoryListViewPresenter();
-                bean = new HistoryInfoBean();
-                bean.src = url;
-                bean.result = json;
-                presenter.InsertToHistory(bean);
+
+                if (!url.toString().equals("") && !json.toString().equals("no query")) {
+                    HistoryInfoBean bean;
+                    HistoryListViewPresenter presenter = new HistoryListViewPresenter();
+                    bean = new HistoryInfoBean();
+                    bean.src = url;
+                    bean.result = json;
+                    presenter.InsertToHistory(bean);
+                }
             }
 
             @Override

@@ -73,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (!flag) {
             Toast.makeText(this, "无网络连接！", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(this, "网络准备充分！", Toast.LENGTH_SHORT).show();
+    //        Toast.makeText(this, "网络准备充分！", Toast.LENGTH_SHORT).show();
         }
     }
 
