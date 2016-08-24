@@ -5,6 +5,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
@@ -21,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 @TargetApi(Build.VERSION_CODES.M)
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener,AbsListView.OnScrollListener {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, AbsListView.OnScrollListener {
     private ListView listView;
     private ArrayAdapter<String> my_arrAdapter;
     private SimpleAdapter my_simpleAdapter;
@@ -53,10 +55,52 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         listView.setOnItemClickListener(this);
         listView.setOnScrollListener(this);
 
-        LayoutAnimationController lac=new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.layoutanim));
+        LayoutAnimationController lac = new LayoutAnimationController(AnimationUtils.loadAnimation(this, R.anim.layoutanim));
         lac.setOrder(LayoutAnimationController.ORDER_NORMAL);
         listView.setLayoutAnimation(lac);
         listView.startLayoutAnimation();
+
+        /**
+         * 注册上下文菜单
+         */
+        this.registerForContextMenu(listView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        /**
+         * 设置显示内容
+         */
+        menu.setHeaderTitle("操作");
+        menu.setHeaderIcon(R.mipmap.ic_launcher);
+        menu.add(1, 1, 1, "复制");
+        menu.add(1, 2, 1, "删除");
+        menu.add(1, 3, 1, "粘贴");
+
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        Log.i("iii","onContextItemSelected");
+        switch (item.getItemId()) {
+            case 1: {
+                Toast.makeText(MainActivity.this, "点击复制", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case 2: {
+                Toast.makeText(this, "点击删除", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            case 3: {
+                Toast.makeText(this, "点击粘贴", Toast.LENGTH_SHORT).show();
+                break;
+            }
+            default: {
+
+            }
+        }
+        return super.onContextItemSelected(item);
     }
 
     private List<Map<String, Object>> getdata() {
@@ -73,27 +117,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         String src = listView.getItemAtPosition(i) + ":id = " + l;
-        Toast.makeText(this, src, Toast.LENGTH_LONG).show();
+  //    Toast.makeText(this, src, Toast.LENGTH_LONG).show();
 
     }
 
     @Override
     public void onScrollStateChanged(AbsListView absListView, int i) {
-        switch (i)
-        {
+        switch (i) {
             case SCROLL_STATE_FLING:
-                Log.i("tag","用户在手指离开之前，用力的划一下 试图惯性滑动");
-                Map<String,Object> map = new HashMap<String, Object>();
-                map.put("pic",R.mipmap.ic_launcher);
-                map.put("text","add");
-                datalist.add(map);
+                Log.i("tag", "用户在手指离开之前，用力的划一下 试图惯性滑动");
+                for (int j = 0; j < 20; j++) {
+                    Map<String, Object> map = new HashMap<String, Object>();
+                    map.put("pic", R.mipmap.ic_launcher);
+                    map.put("text", "add" + j);
+                    datalist.add(map);
+                }
                 my_simpleAdapter.notifyDataSetChanged();
                 break;
             case SCROLL_STATE_IDLE:
-                Log.i("tag","空闲 试图停止滑动");
+                Log.i("tag", "空闲 试图停止滑动");
                 break;
             case SCROLL_STATE_TOUCH_SCROLL:
-                Log.i("tag","手指没有离开屏幕，视图正在滑动");
+                Log.i("tag", "手指没有离开屏幕，视图正在滑动");
                 break;
         }
     }
