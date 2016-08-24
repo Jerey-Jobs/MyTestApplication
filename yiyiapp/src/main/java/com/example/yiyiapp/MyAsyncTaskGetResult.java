@@ -75,16 +75,18 @@ public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, Strin
         HttpClient httpCLient = new DefaultHttpClient();
         String res = "";
         // 创建get请求实例
+
         try {
+      //      this.get(3000, TimeUnit.MILLISECONDS);
             HttpGet httpget = new HttpGet(getStringURL + input);
             HttpResponse response = httpCLient.execute(httpget);
             HttpEntity entity = response.getEntity();
             res = EntityUtils.toString(entity);
 
+
             res = JsonForRes(res);
-        }catch (IllegalArgumentException e)
-        {
-      //      Toast.makeText(MainActivity.getContext(),"错误的格式",Toast.LENGTH_SHORT).show();
+        }catch (IllegalArgumentException e) {
+            //      Toast.makeText(MainActivity.getContext(),"错误的格式",Toast.LENGTH_SHORT).show();
             res = "格式错误 输入中不能有回车等符号";
         }
 

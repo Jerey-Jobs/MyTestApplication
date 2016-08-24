@@ -29,11 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private MainPresenter presenter = new MainPresenter();
     private static myToast toast ;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        context = MainActivity.this;
+        context = getApplicationContext();
         InitView();
         checkNetworkState();
         toast = new myToast((ViewGroup)findViewById(R.id.llToast));
