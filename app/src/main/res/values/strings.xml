@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">VPN管理器</string>
-    <string name="infotext">"此app开发为我的vpn服务器使用，输入账号密码，服务器地址159.203.219.58"</string>
+    <string name="infotext">"此app开发为我的vpn服务器使用，输入账号密码，服务器地址159.203.215.58"</string>
 </resources>

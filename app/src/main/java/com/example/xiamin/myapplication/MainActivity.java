@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,8 +37,11 @@ public class MainActivity extends AppCompatActivity {
         enSureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                if(usrPassword.getText().toString().equals(usrPassword2.getText().toString()))
+                if(TextUtils.isEmpty(usrPassword.getText().toString()) ||TextUtils.isEmpty(usrName.getText().toString()))
+                {
+                    Toast.makeText(MainActivity.this,"账户名和密码不能为空",Toast.LENGTH_SHORT).show();
+                }
+                else if(usrPassword.getText().toString().equals(usrPassword2.getText().toString()))
                 {
                     new Mythread(usrName.getText().toString(),usrPassword.getText().toString()).start();
                     Log.i("iii", usrPassword.getText().toString() + usrPassword2.getText());
@@ -109,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             MySocket socket = new MySocket();
             socket.connection();
-            socket.sendMsg("VPNregister." + name + " pptpd " + password  +" *");
+            socket.sendMsg("VPNregister." +  "\"" + name + "\"" + " pptpd " + "\"" + password + "\""  +" *");
             String r = socket.readMsg();
 
             Message message = new Message();
