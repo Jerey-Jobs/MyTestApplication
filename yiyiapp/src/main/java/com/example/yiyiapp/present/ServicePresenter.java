@@ -27,7 +27,7 @@ public class ServicePresenter {
 
  //               Toast.makeText(MainActivity.getContext(),"错误的格式", Toast.LENGTH_SHORT).show();
                 /**
-                 * 解决粘贴板重复响应的问题
+                 * 解决粘贴板重复响应的问题，200ms内不重复相应（但是好像并没有太大的改善）
                  */
                 long now = System.currentTimeMillis();
                 if(now - pritime <= 200 && clipboardManager.getText().toString().equals(""))
@@ -44,6 +44,10 @@ public class ServicePresenter {
                     public void taskSuccessful(String json) {
                   //      Toast.makeText(MainActivity.getContext(),json, Toast.LENGTH_SHORT).show();
                         MainActivity.getToast().show(clipboardManager.getText().toString(),json);
+                        /**
+                         *将记录插入到历史纪录中，合理的方法是维护一个历史纪录的表，插入时判断是否已经存在
+                         * 不然会出现历史纪录重复的问题
+                         */
                         HistoryInfoBean bean;
                         HistoryListViewPresenter presenter = new HistoryListViewPresenter();
                         bean = new HistoryInfoBean();

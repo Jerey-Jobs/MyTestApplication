@@ -19,6 +19,7 @@ import okhttp3.OkHttpClient;
 
 /**
  * Created by Xiamin on 2016/7/30.
+ * 抽象类，提供两个抽象方法供回掉
  */
 public abstract class MyAsyncTaskGetResult extends AsyncTask<String, Void, String>{
 

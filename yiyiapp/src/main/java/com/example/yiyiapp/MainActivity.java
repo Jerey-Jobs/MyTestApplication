@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.main_ensure_button: {
+
                 presenter.MainPresenterget(editTextInput.getText().toString(),textViewResult,buttonTranslate);
                 Log.i("iii","button pressed!");
                 break;

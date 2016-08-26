@@ -25,6 +25,9 @@ public class ListenClipboardService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         Log.i("iii","onStartCommand");
+        /**
+         * 在presenter中获取service的管理结构，接下来所有业务都是presenter完成
+         */
         presenter = new ServicePresenter();
         presenter.SetClipBoardListener();
         return super.onStartCommand(intent, flags, startId);

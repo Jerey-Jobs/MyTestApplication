@@ -1,6 +1,7 @@
 package com.example.yiyiapp.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,10 @@ public class HistoryListViewAdapter extends BaseAdapter{
         inflater = LayoutInflater.from(context);
         presenter = new HistoryListViewPresenter();
         presenter.SqliteRead(list);
+        for (HistoryInfoBean h:list
+                ) {
+            Log.i("iii","history--:" + h.src + h.result);
+        }
     }
 
     @Override
