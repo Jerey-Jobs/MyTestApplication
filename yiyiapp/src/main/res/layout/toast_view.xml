@@ -8,18 +8,19 @@
 
     <TextView
         android:id="@+id/tvTitleToast"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="1dip"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:textSize="20dp"
-        android:textColor="#ffffffff" />
+        android:textColor="#ffffffff"
+        android:padding="5dp"/>
 
 
     <LinearLayout
         android:id="@+id/llToastContent"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dip"
         android:layout_marginLeft="1dip"
