@@ -38,9 +38,10 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
-        Log.i("iii","surfaceCreated");
+        Log.i("iii", "surfaceCreated");
         mThread = new DrawThread(getContext(), holder);
         mThread.start();
+        Log.i("iii", "UI thread id: " + Thread.currentThread().getId());
     }
 
     @Override
@@ -75,34 +76,39 @@ public class MySurfaceView extends SurfaceView implements SurfaceHolder.Callback
         public void run() {
             while (isRunning) {
                 synchronized (surfaceHolder) {
-                    Canvas canvas = surfaceHolder.lockCanvas();
-                    draw(canvas);
-                    try {
-                        Thread.sleep(10);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }finally {
-                        surfaceHolder.unlockCanvasAndPost(canvas);
+                    if (surfaceHolder != null) {
+                        Canvas canvas = surfaceHolder.lockCanvas();
+                        draw(canvas);
+                        try {
+                            Thread.sleep(10);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        } finally {
+                            surfaceHolder.unlockCanvasAndPost(canvas);
+                        }
                     }
                 }
             }
         }
 
         public void draw(Canvas canvas) {
-            if (r <30 ) {
-                diff = 5;
-            } else if(r > 150)
-            {
-                diff = -5;
+            if(canvas == null) {
+                return;
+            }
+            if (r < 30) {
+                diff = 10;
+            } else if (r > 150) {
+                diff = -10;
             }
             r += diff;
             canvas.drawColor(Color.WHITE);
             canvas.translate(200, 200);
             canvas.drawCircle(0, 0, r, paint);
+            Log.i("iii", "draw thread id: " + Thread.currentThread().getId());
         }
 
         private void stopThread() {
-            Log.i("iii","stopThread()");
+            Log.i("iii", "stopThread()");
             isRunning = false;
         }
     }
